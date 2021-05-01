@@ -8,6 +8,14 @@ body{
   font-weight: 600;
 }
 
+.hero{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%); */
+}
+
 .box{
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(15px);
@@ -65,9 +73,19 @@ select{
     width: 80%;
   }
   .box{
-    padding: 12%;
+    padding: 7%;
+    width: 80%;
   }
-
+  .heading{
+    font-size: 170%;
+  }
+  .hero h1{
+    font-size: 160%;
+  }
+  .hero{
+    /* width: 70%; */
+    text-align: center;
+  }
 }
 
 .disclaimer{
