@@ -1,0 +1,75 @@
+body{
+  background: #E0E0E0;
+  font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+}
+
+.bold{
+  font-weight: 600;
+}
+
+.box{
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  box-shadow: 3px 3px 30px rgba(0, 0, 0, 0.15);
+  padding: 5%;
+  border-radius: 15px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none !important;
+}
+
+a, a:hover{
+  text-decoration: none;
+
+}
+
+.cntr{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* background-color: red; */
+}
+
+.submit{
+  position: relative;
+  left: 50%;
+  margin-top: 5%;
+  transform: translate(-50%);
+}
+
+.ftr{
+  top: 95%;
+  width: 100%;
+
+}
+
+select{
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 98.5% !important; /* !important used for overriding all other customisations */
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 15px) !important; /* Better placement regardless of input width */
+
+}
+
+@media screen and (max-width: 480px) {
+  .ftr{
+    font-size: 90%;
+    width: 80%;
+  }
+  .box{
+    padding: 12%;
+  }
+
+}
+
+.disclaimer{
+  font-size: 70%;
+}
