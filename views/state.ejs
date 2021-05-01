@@ -1,0 +1,16 @@
+<%- include("partials/header") -%>
+
+<div class="cntr box" style="text-align: center;">
+  <h1 class="bold" style="padding-bottom: 5%;"><%= queryRes[0]%>, <%= queryRes[1]%></h1>
+  <p>Registered for vaccination: <%= queryRes[2]%></p>
+  <p>Total vaccinated: <%= queryRes[3]%></p>
+
+  <p>Confirmed cases: <%= queryRes[4]%></p>
+  <p>Recovered: <%= queryRes[5]%></p>
+  <p>Deceased: <%= queryRes[6]%></p>
+  <form action="/state" method="post">
+    <button type="submit" class="btn btn-primary" style="margin-top: 5%;">Check again</button>
+  </form>
+</div>
+
+<%- include("partials/footer") -%>
