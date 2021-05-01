@@ -93,6 +93,6 @@ app.post("/state", function(req, res){
 
 
 //start server
-app.listen(3000, function(){
-  console.log("Server is running on PORT 3000");
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Main server is running.");
 });
