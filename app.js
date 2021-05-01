@@ -13,6 +13,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
+//fetch after 12 hours
+var interval = 43200000;
+
+const report = require(__dirname + "/report.js");
+report.getReport();
+setInterval(function(){
+    report.getReport();
+    console.log("Updated after " + interval + " seconds.");
+}, 43200000);
+
 //today, yesterday
 let currDate = new Date();
 let formatedTday = (currDate.toLocaleDateString("en-GB"));
