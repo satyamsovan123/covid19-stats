@@ -4,6 +4,12 @@ let queryState = "";
 let queryDate = "";
 let queryRes = [];
 
+let distInputVaccine = "";
+var vaccineTweakedDay = "";
+let vaccineUrl = "";
+
+let vaccineCenterLists = [];
+const https = require("https");
 const fs = require("fs");
 const csv = require("csv-parser");
 const express = require("express");
@@ -12,18 +18,18 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+var getJSON = require("get-json");
+const fetch = require("node-fetch");
 
-//fetch after 12 hours
 var interval = 43200000;
 
 const report = require(__dirname + "/report.js");
 report.getReport();
 setInterval(function(){
     report.getReport();
-    console.log("Updated after " + interval + " seconds.");
+    console.log("Updated after " + interval + " seconds");
 }, 43200000);
 
-//today, yesterday
 let currDate = new Date();
 let formatedTday = (currDate.toLocaleDateString("en-GB"));
 
@@ -37,10 +43,8 @@ app.get("/", function(req, res){
 
 app.post("/", function(req, res){
   queryRes = [];
-
   queryState = req.body.stateInput;
   queryDate = req.body.dateInput;
-  // console.log(queryState, queryDate);
 
   let year = new Date(queryDate);
   var tweakedDay = new Date(queryDate);
@@ -55,11 +59,10 @@ app.post("/", function(req, res){
       var currResJSONString = JSON.stringify((row));
       var currResJSON = JSON.parse(currResJSONString);
 
-      //get the previous day report for query
       if(currResJSON["State"] == queryState && currResJSON["Updated On"] == queryDate){
-
+          let totalAdministered = parseInt(currResJSON["First Dose Administered"]) + parseInt(currResJSON["Second Dose Administered"]);
           queryRes.push(currResJSON["State"], currResJSON["Updated On"],
-          currResJSON["Total Individuals Registered"], currResJSON["Total Individuals Vaccinated"]);
+          totalAdministered.toString(), currResJSON["Total Individuals Vaccinated"]);
           // console.log(queryRes);
 
       }
@@ -81,14 +84,12 @@ app.post("/", function(req, res){
       if(currResJSON["State"] == queryState && tweakedDay == queryDate){
           queryRes.push(currResJSON["Confirmed"],
           currResJSON["Recovered"], currResJSON["Deceased"]);
-          console.log(queryRes);
+          // console.log(queryRes);
 
           res.redirect("/state");
       }
 
   });
-
-  // res.redirect("/state");
 
 });
 
@@ -101,8 +102,76 @@ app.post("/state", function(req, res){
   res.redirect("/");
 });
 
+app.get("/vaccinations", function(req, res){
+  res.render("vaccinations");
+});
 
+app.post("/vaccinations", function(req, res){
+
+  // console.log(req.body);
+  distInputVaccine = req.body.distInputVaccine;
+  vaccineTweakedDay = new Date(req.body.dateInput);
+
+  let dd = vaccineTweakedDay.getDate();
+
+  let mm = vaccineTweakedDay.getMonth() + 1;
+  const yyyy = vaccineTweakedDay.getFullYear();
+  if(dd<10)
+  {
+      dd=`0${dd}`;
+  }
+
+  if(mm<10)
+  {
+      mm=`0${mm}`;
+  }
+  vaccineTweakedDay = `${dd}-${mm}-${yyyy}`;
+  // console.log("__________");
+  vaccineUrl = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=" + distInputVaccine + "&date=" + vaccineTweakedDay;
+  console.log("Retriving data from: " + vaccineUrl);
+
+  res.redirect("/vaccinations-result");
+
+});
+
+app.get("/vaccinations-result", function(req, res){
+  vaccineCenterLists = [];
+
+  
+  getJSON(vaccineUrl)
+    .then(function(responseFromUrl) {
+    // console.log(responseFromUrl.sessions.length);
+    console.log(responseFromUrl);
+    if(responseFromUrl.sessions.length == 0){
+      console.log("No vaccine details available");
+    }
+    else{
+      console.log("Getting vaccine details available");
+      for(let i = 0; i < responseFromUrl.sessions.length; i++){
+
+        vaccineCenterLists.push(
+        responseFromUrl.sessions[i].name + ", " +
+        responseFromUrl.sessions[i].address + ", " +
+        responseFromUrl.sessions[i].district_name + ", " +
+        responseFromUrl.sessions[i].state_name + " || " +
+        responseFromUrl.sessions[i].min_age_limit + " || " +
+        responseFromUrl.sessions[i].available_capacity + " || " +
+        responseFromUrl.sessions[i].slots
+        );
+        // console.log(response.sessions[i]);
+      }
+    }
+    // console.log(vaccineCenterLists.sort());
+    res.render("vaccinationsResult", {vaccineCenterLists: vaccineCenterLists});
+
+  }).catch(function(error) {
+    console.log("Error while fetching JSON from API: " + error);
+  });
+
+
+
+});
 //start server
 app.listen(process.env.PORT || 3000, function(){
-  console.log("Main server is running.");
+  console.log("Main server is running...");
 });

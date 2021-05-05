@@ -1,20 +1,40 @@
 body{
   background: #E0E0E0;
   font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
+}
+a{
+  text-decoration: none;
+  color: #4CAC28;
 }
 
-.bold{
-  font-weight: 600;
+a:hover{
+  color: black !important;
+  text-decoration: none;
 }
 
-.hero{
-  position: absolute;
-  top: 20%;
+.my-2{
+  border-color: #4CAC28;
+}
+.container-fluid{
+  margin-top: 45vh;
+  transform: translateY(-50%);
+  width: 40%;
+}
+
+.disclaimer{
+  font-size: 70%;
+}
+
+.ftr{
+  text-align: center;
+  position: relative;
+  top: 95%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  /* transform: translate(-50%, -50%); */
+  transform: translateX(-50%);
+  width: 50%;
+  bottom: 0%;
 }
+
 
 .box{
   background: rgba(255, 255, 255, 0.05);
@@ -24,25 +44,22 @@ body{
   border-radius: 15px;
 }
 
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none !important;
+.submit{
+  background-color: #B42525 !important;
 }
 
-a, a:hover{
-  text-decoration: none;
-
+.hero{
+  padding-top: 15%;
+  text-align: center;
 }
 
-.cntr{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.resHead{
+  text-align: center;
+  font-weight: bold;
+}
 
-  /* background-color: red; */
+.bold{
+  font-weight: 600;
 }
 
 .submit{
@@ -52,20 +69,42 @@ a, a:hover{
   transform: translate(-50%);
 }
 
-.ftr{
-  top: 95%;
-  width: 100%;
+.vacres{
+  padding-top: 5%;
+  text-align: center;
+}
+
+@media screen and (max-height: 738px) {
+  .box{
+    /* position: relative; */
+    width: 60%;
+    margin-top: 60vh !important;
+  }
+  .heading{
+    font-size: 170%;
+  }
+}
+
+@media screen and (max-height: 667px) {
+  .box{
+    /* position: relative; */
+    margin-top: 80vh !important;
+  }
 
 }
 
-select{
-    -moz-appearance:none; /* Firefox */
-    -webkit-appearance:none; /* Safari and Chrome */
-    appearance:none;
-    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 98.5% !important; /* !important used for overriding all other customisations */
-    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 15px) !important; /* Better placement regardless of input width */
-
+@media screen and (min-width: 400px), screen and (max-height: 667px){
+  .hero{
+      padding-top: 10%;
+  }
+  .box{
+    /* position: relative; */
+    margin-top: 50vh !important;
+    width: 65%;
+  }
 }
+
+
 
 @media screen and (max-width: 480px) {
   .ftr{
@@ -74,20 +113,15 @@ select{
   }
   .box{
     padding: 7%;
-    width: 80%;
+    width: 85%;
   }
   .heading{
     font-size: 170%;
   }
-  .hero h1{
-    font-size: 160%;
-  }
-  .hero{
-    /* width: 70%; */
-    text-align: center;
-  }
 }
 
-.disclaimer{
-  font-size: 70%;
+@media screen and (min-width: 800px) {
+  .box{
+    width: 45%;
+  }
 }

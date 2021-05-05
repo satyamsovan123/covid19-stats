@@ -1,16 +1,36 @@
 <%- include("partials/header") -%>
+<title>Report - <%= queryRes[0]%></title>
+</head>
 
-<div class="cntr box" style="text-align: center;">
+<body>
+
+  <nav class="navbar navbar-light">
+    <a class="navbar-brand" href="/">
+      <img src="/website-assets/images/virus.png" width="30" height="30" class="d-inline-block align-top" alt="covid-19-stats-logo">
+      COVID<span style="color: #B42525">19</span> Stats
+    </a>
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-sm btn-outline-success my-2 my-sm-0"><a href="/vaccinations">Vaccinations</a></button>
+    </form>
+  </nav>
+
+<div class="container-fluid box" style="text-align: center; margin-top: 50vh;">
   <h1 class="bold heading" style="padding-bottom: 5%;"><%= queryRes[0]%>, <%= queryRes[1]%></h1>
-  <p>Registered for vaccination: <%= queryRes[2]%></p>
+  <p>Total vaccines administered: <%= queryRes[2]%></p>
   <p>Total vaccinated: <%= queryRes[3]%></p>
 
   <p>Confirmed cases: <%= queryRes[4]%></p>
   <p>Recovered: <%= queryRes[5]%></p>
   <p>Deceased: <%= queryRes[6]%></p>
   <form action="/state" method="post">
-    <button type="submit" class="btn btn-primary" style="margin-top: 5%;">Check again</button>
+    <button type="submit" class="btn btn-danger btn-primary" style="margin-top: 5%;">Check again</button>
   </form>
 </div>
+<footer class="ftr" style="text-align: center;">
+  <p>Refresh page for trying again!</p>
+  <p>The data is updated using API provided by Indian government.</p>
+  <p class="disclaimer">Data is updated every night.</p>
+</footer>
+</body>
 
-<%- include("partials/footer") -%>
+</html>
