@@ -13,7 +13,7 @@ const express = require("express");
 const app = express();
 
 //start server
-port = 3001
-app.listen(port, function(){
-  console.log("Server is running on PORT " + port);
+port = process.env.PORT;
+app.listen(port || 3001, function(){
+  console.log("Update server is running.");
 });

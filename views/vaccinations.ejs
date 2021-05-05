@@ -1,0 +1,46 @@
+<%- include("partials/header") -%>
+<title>Vaccination Centers</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-light">
+    <a class="navbar-brand" href="/">
+      <img src="/website-assets/images/virus.png" width="30" height="30" class="d-inline-block align-top" alt="covid-19-stats-logo">
+      COVID<span style="color: #B42525">19</span> Stats
+    </a>
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-sm btn-outline-success my-2 my-sm-0"><a href="/vaccinations">Vaccinations</a></button>
+    </form>
+  </nav>
+  <div class="box container-fluid">
+    <form name="ipform" action="/vaccinations" method="post">
+      <div class="form-group">
+        <label>State</label>
+        <select required name="stateInputVaccine" id="statein" class="form-control dynamic-states">
+          <option class="firstState" disabled="disabled" hidden="" value="Select a state" selected>Select a state</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>District</label>
+        <select required name="distInputVaccine" id="distin" class="form-control dynamic-dist">
+          <option class="firstDist" disabled="disabled" hidden="" value="Select a district" selected>Select a district</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" class="form-control" name="dateInput" id="datein">
+      </div>
+
+      <button type="submit" class="btn submit btn-danger">Check</button>
+    </form>
+  </div>
+
+
+
+  <script src="/website-assets/vaccine.js" charset="utf-8"></script>
+
+
+  </body>
+
+  </html>
