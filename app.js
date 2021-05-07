@@ -137,16 +137,16 @@ app.post("/vaccinations", function(req, res){
 app.get("/vaccinations-result", function(req, res){
   vaccineCenterLists = [];
 
-  
+
   getJSON(vaccineUrl)
     .then(function(responseFromUrl) {
     // console.log(responseFromUrl.sessions.length);
-    console.log(responseFromUrl);
+    // console.log(responseFromUrl);
     if(responseFromUrl.sessions.length == 0){
       console.log("No vaccine details available");
     }
     else{
-      console.log("Getting vaccine details available");
+      console.log("Getting vaccine details");
       for(let i = 0; i < responseFromUrl.sessions.length; i++){
 
         vaccineCenterLists.push(
